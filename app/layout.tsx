@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
+import LoginModal from "./components/modals/LoginModal";
+import SignUpModal from "./components/modals/SignUpModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,16 +25,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar/>
-        <div className="pt-32">
-        {children}
-        </div>
-      </body>
-    </html>
+  const content = ( 
+    <p>Yo yo</p>
   )
+return (
+  <html lang="en">
+    <body
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+    >
+      <Navbar />
+      <div className="pt-32">
+        {children}
+      </div>
+      <LoginModal/>
+      <SignUpModal/>
+    </body>
+  </html>
+)
 }
