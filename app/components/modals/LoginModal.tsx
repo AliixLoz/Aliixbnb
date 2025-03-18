@@ -1,21 +1,51 @@
 'use client';
 
 import useLoginModal from "@/app/hooks/useLoginModal";
-import Modal from "./Modals";
+import Modal from "./Modal";
 import CustomButton from "../forms/CustomButton";
+import { useState } from "react";
+import apiService from "@/app/services/apiService";
+import { handleLogin } from "@/app/lib/actions";
+import { useRouter } from "next/navigation";
 
 const LoginModal = () => {
+    const router = useRouter()
     const loginModal = useLoginModal()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState<string[]>([])
+
+    const submitLogin = async () => {
+        const formData = {
+            email: email,
+            password: password
+        }
+        const response = await apiService.post('/api/auth/login/', JSON.stringify(formData))
+
+        if (response.access) {
+            handleLogin(response.user.pk, response.access, response.refresh)
+
+            loginModal.close()
+
+            router.push('/')
+        } else {
+            setErrors(response.non_field_errors)
+        }
+    }
 
     const content = (
         <>
-            <form className="space-y-4">
-                <input placeholder="Direccion de correo" type="email" className="w-full h-[54px] px-4 border border-gray-100 rounded-xl" />
-                <input placeholder="Contraseña" type="email" className="w-full h-[54px] px-4 border border-gray-100 rounded-xl" />
-                <div className="p-5 bg-pink-500 text-white rounded-xl opacity-80">Mensaje de error</div>
+            <form action={submitLogin} className="space-y-4">
+                <input onChange={(e) => setEmail(e.target.value)} placeholder="Direccion de correo" type="email" className="w-full h-[54px] px-4 border border-gray-100 rounded-xl" />
+                <input onChange={(e) => setPassword(e.target.value)} placeholder="Contraseña" type="email" className="w-full h-[54px] px-4 border border-gray-100 rounded-xl" />
+                {errors.map((error, index) => {
+                    return (
+                        <div key={`error_${index}`} className="p-5 bg-pink-500 text-white rounded-xl opacity-80">{error}</div>
+                    )
+                })}
                 <CustomButton
                     label="Aceptar"
-                    onClick={() => console.log('Test')} className={""} />
+                    onClick={submitLogin} />
             </form>
         </>
     )

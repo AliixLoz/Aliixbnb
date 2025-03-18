@@ -2,13 +2,20 @@
 
 import { useState } from "react";
 import MenuLink from "./MenuLink";
+import LogoutButton from "../LogoutButton"
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useSignUpModal from "@/app/hooks/useSignUpModal";
 
-const UserNav = () => {
+interface UserNavProps {
+    userId?: string | null
+}
+
+const UserNav: React.FC<UserNavProps> = ({userId}) => {
     const loginModal = useLoginModal()
     const SignUpModal = useSignUpModal()
     const [isOpen, setIsOpen] = useState(false)
+
+    console.log('añslf', userId)
     return (
         <div className="p-2 relative inline-block border rounded-full">
             <button onClick={() => setIsOpen(!isOpen)} className="flex items-center">
@@ -22,20 +29,26 @@ const UserNav = () => {
             </button>
             {isOpen && (
                 <div className="w-[220px] absolute top-[60px] right-0 bg-white border rounded-xl shadow-md flex flex-col cursor-pointer">
-                    <MenuLink
-                        label='Iniciar Sesión'
-                        onClick={() => {
-                            loginModal.open()
-                            setIsOpen(false)
-                        }}
-                    />
-                    <MenuLink
-                        label='Registrarse'
-                        onClick={() => {
-                            SignUpModal.open()
-                            setIsOpen(false)
-                        }}
-                    />
+                    {userId ? (
+                        <LogoutButton />
+                    ) : (
+                        <>
+                            <MenuLink
+                                label='Iniciar Sesión'
+                                onClick={() => {
+                                    loginModal.open()
+                                    setIsOpen(false)
+                                }}
+                            />
+                            <MenuLink
+                                label='Registrarse'
+                                onClick={() => {
+                                    SignUpModal.open()
+                                    setIsOpen(false)
+                                }}
+                            />
+                        </>
+                    )}
                 </div>
             )}
         </div>
