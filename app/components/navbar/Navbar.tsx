@@ -14,19 +14,21 @@ const Navbar = async () => {
             <div className="max-w-[1500px] mx-auto px-6">
                 <div className="flex justify-between items-center">
                     <Link href="/">
-                        <Image src= "/logo.png"
-                        alt="Djangonbnb logo"
-                        width={180}
-                        height={38}
+                        <Image src="/logo.png"
+                            alt="Djangonbnb logo"
+                            width={180}
+                            height={38}
                         />
                     </Link>
                     <div className='flex space-x-6'>
-                        <SearchFilters/>
+                        <SearchFilters />
                     </div>
                     <div className='flex items-center space-x-6'>
-                        <AddPropertyButton/>
+                        <AddPropertyButton
+                            userId={userId}
+                        />
                         <UserNav
-                        userId={userId}
+                            userId={userId}
                         />
                     </div>
                 </div>

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/navbar/Navbar";
 import LoginModal from "./components/modals/LoginModal";
 import SignUpModal from "./components/modals/SignUpModal";
+import AddPropertyModal from "./components/modals/AddPropertyModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ return (
       </div>
       <LoginModal/>
       <SignUpModal/>
+      <AddPropertyModal/>
     </body>
   </html>
 )
