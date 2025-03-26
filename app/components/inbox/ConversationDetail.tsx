@@ -6,14 +6,14 @@ const ConversationDetail = () => {
         <>
             <div className="max-h-[400px] overflow-auto flex flex-col space-y-4">
                 <div className="w-[80%] py-4 px-6 rounded-xl bg-gray-400">
-                    <p className="font-mono text-white">Jen</p>
+                    <p className="font-mono text-black">Jen</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Cupiditate obcaecati nam architecto in quibusdam suscipit officia alias,
                         labore aliquid ex repudiandae atque maiores magni illum exercitationem ducimus dolorem aut? Ut?</p>
                 </div>
 
                 <div className="w-[80%] ml-[20%] py-4 px-6 rounded-xl bg-gray-400">
-                    <p className="font-mono text-white">Yop</p>
+                    <p className="font-mono text-black">Yop</p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Cupiditate obcaecati nam architecto in quibusdam suscipit officia alias,
                         labore aliquid ex repudiandae atque maiores magni illum exercitationem ducimus dolorem aut? Ut?</p>
